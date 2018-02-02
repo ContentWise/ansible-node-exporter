@@ -1,0 +1,33 @@
+---
+- name: ensure Prometheus exporters directory exist
+  file:
+    path: "{{ node_exporter_install_dir }}"
+    state: directory
+
+- name: unarchive Node Exporter
+  unarchive:
+    remote_src: yes
+    dest: "{{ node_exporter_install_dir }}"
+    src: "{{ node_exporter_url }}"
+    creates: "{{ node_exporter_binary }}"
+  notify: restart node exporter
+
+- name: create symlink to the current release
+  file:
+    src: "{{ node_exporter_binary }}"
+    path: "{{ node_exporter_symlink }}"
+    state: link
+
+- name: create systemd script
+  template:
+    src: node_exporter.service.j2
+    dest: /etc/systemd/system/node_exporter.service
+  notify: restart node exporter
+
+- meta: flush_handlers
+
+- name: make sure Node Exporter is started
+  service:
+    name: node_exporter
+    state: started
+    enabled: yes

@@ -1,0 +1,9 @@
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+ExecStart={{ node_exporter_symlink }} {% for collector in node_exporter_enabled_collectors %}--collector.{{ collector }} {% endfor %} --web.listen-address={{ node_exporter_listen_address }}
+
+[Install]
+WantedBy=multi-user.target
