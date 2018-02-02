@@ -1,8 +1,12 @@
----
 sudo: required
 services:
-  - docker
+- docker
 install:
-  - bundle install
+- bundle install
 script:
-  - kitchen test
+- kitchen test
+notifications:
+  email: false
+  slack:
+    on_success: always
+    on_failure: always
