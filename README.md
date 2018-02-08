@@ -1,4 +1,6 @@
-# Ansible Node Exporter Role
+Ansible Node Exporter Role
+============
+
 [![Build Status](https://travis-ci.org/ContentWise/ansible-node-exporter.svg?branch=master)](https://travis-ci.org/ContentWise/ansible-node-exporter)
 
 An Ansible Role that installs [Prometheus Node Exporter](https://github.com/prometheus/node_exporter) on Linux.

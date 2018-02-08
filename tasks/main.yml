@@ -17,6 +17,7 @@
     src: "{{ node_exporter_binary }}"
     path: "{{ node_exporter_symlink }}"
     state: link
+  notify: restart node exporter
 
 - name: create systemd script
   template:

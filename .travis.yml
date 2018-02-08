@@ -7,7 +7,6 @@ install:
 script:
 - kitchen test
 notifications:
-  email: false
   slack:
     on_success: change
     on_failure: always
